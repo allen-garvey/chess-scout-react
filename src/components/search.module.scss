@@ -1,0 +1,24 @@
+.searchContainer {
+    display: flex;
+}
+.searchLabel {
+    flex-grow: 1;
+    margin-right: 1rem;
+}
+.checkboxContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0.5rem 0 0;
+}
+.label {
+    cursor: pointer;
+    margin-right: 0.5em;
+}
+.button {
+    align-self: flex-end;
+    height: 100%;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
