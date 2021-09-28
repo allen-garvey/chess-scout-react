@@ -1,4 +1,10 @@
-export default () => [
+export interface IGameType {
+    title: string;
+    key: string;
+    isChecked: boolean;
+};
+
+const getGameTypes =  (): IGameType[] => [
     {
         title: 'Ultra Bullet',
         key: 'ultraBullet',
@@ -25,3 +31,5 @@ export default () => [
         isChecked: true,
     },
 ];
+
+export default getGameTypes;
