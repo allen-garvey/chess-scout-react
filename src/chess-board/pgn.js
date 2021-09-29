@@ -1,5 +1,3 @@
-import { coral } from "color-name";
-
 const BLACK = 'b';
 const WHITE = 'w';
 const EMPTY_CELL = '00';
