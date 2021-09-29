@@ -1,15 +1,29 @@
-export function parsePgn(pgnRaw){
+export interface GameHeader {
+    Winner: string;
+    Result: string;
+    White: string;
+    Black: string;
+    Site: string;
+    Variant: string;
+}
+
+export interface PgnGame {
+    header: GameHeader;
+    moves: string[][];
+}
+
+export function parsePgn(pgnRaw: string): PgnGame[]{
     return extractHeaderAndMoves(separateGames(pgnRaw));
 }
 
-function separateGames(pgnRaw){
+function separateGames(pgnRaw: string): string[]{
     const gamesRaw = pgnRaw.split('\n\n\n').filter((line)=>{
         return line && !line.match(/^\s+$/);
     });
     return gamesRaw;
 }
 
-function extractHeaderAndMoves(gamesRaw){
+function extractHeaderAndMoves(gamesRaw: string[]): PgnGame[]{
     return gamesRaw
         .map((game)=>{
             const split = game.split('\n\n');
@@ -22,8 +36,15 @@ function extractHeaderAndMoves(gamesRaw){
         .filter((game) => game.header.Variant === 'Standard');
 }
 
-function parseHeader(headerRaw){
-    const header = {};
+function parseHeader(headerRaw: string): GameHeader{
+    const header: GameHeader = {
+        Winner: '',
+        Result: '',
+        White: '',
+        Black: '',
+        Site: '',
+        Variant: '',
+    };
 
     headerRaw.split('\n').forEach((line)=>{
         const key = line.replace(/^\[| .*\].*$/g, '');
@@ -44,7 +65,7 @@ function parseHeader(headerRaw){
     return header;
 }
 
-function extractMoves(movesRaw){
+function extractMoves(movesRaw: string): string[][]{
     return movesRaw
         .replace(/ (1-0|0-1|1\/2-1\/2)$/, '')
         .split(/\d+\. /)

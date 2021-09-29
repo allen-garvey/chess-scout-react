@@ -1,6 +1,22 @@
 import { getResult } from './util';
+import { PgnGame } from './pgn-parser';
 
-export function getMoveTrees(games, playerName){
+interface MoveTrees {
+    white: GameNode;
+    black: GameNode;
+}
+
+interface GameNode {
+    results: {
+        wins: number,
+        draws: number,
+        losses: number,
+    };
+    games: string[];
+    children: Record<string, GameNode>;
+}
+
+export function getMoveTrees(games: PgnGame[], playerName: string): MoveTrees{
     const moveDepth = 15;
     return {
         white: getMoveTreesForColor(games, playerName, 'White', moveDepth),
@@ -8,7 +24,7 @@ export function getMoveTrees(games, playerName){
     };
 }
 
-function createNode(){
+function createNode(): GameNode{
     return {
         results: {
             wins: 0,
@@ -20,7 +36,7 @@ function createNode(){
     };
 }
 
-function getMoveTreesForColor(games, playerName, color, moveDepth){
+function getMoveTreesForColor(games: PgnGame[], playerName: string, color: string, moveDepth: number): GameNode{
     const root = createNode();
     const max = moveDepth * 2;
 
