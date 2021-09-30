@@ -1,4 +1,4 @@
-type Board = string[][];
+export type Board = string[][];
 interface Coordinate {
     x: number;
     y: number;

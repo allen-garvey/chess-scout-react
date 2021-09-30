@@ -1,4 +1,4 @@
-import pgn from './pgn';
+import pgn, { Board } from './pgn';
 
 const square = 64;
 const dimensions = square * 8;
@@ -6,14 +6,14 @@ const LINE_WIDTH = 1.5;
 const WHITE = '#fff';
 const BLACK = '#000';
 
-export function drawBoard(context, moves){
+export function drawBoard(context: CanvasRenderingContext2D, moves: string[]){
     context.canvas.height = dimensions;
     context.canvas.width = dimensions;
     drawSquares(context);
     drawPieces(context, pgn.pgnToPosition(moves));
 }
 
-function drawSquares(context){
+function drawSquares(context: CanvasRenderingContext2D){
     let isWhite = true;
     for(let x=0;x<dimensions;x+=square){
         isWhite = !isWhite;
@@ -25,7 +25,7 @@ function drawSquares(context){
     }
 }
 
-function drawPieces(context, board){
+function drawPieces(context: CanvasRenderingContext2D, board: Board){
     board.forEach((line, y) => line.forEach((piece, x) => {
         const xPosition = x * square;
         const yPosition = y * square;
@@ -60,7 +60,7 @@ function drawPieces(context, board){
     }));
 }
 
-function drawPawn(context, x, y, isWhite){
+function drawPawn(context: CanvasRenderingContext2D, x: number, y: number, isWhite: boolean){
     context.resetTransform();
     context.translate(x+2, y);
     context.scale(1.3, 1.3);
@@ -73,9 +73,9 @@ function drawPawn(context, x, y, isWhite){
     context.stroke(path);
 }
 
-function drawWhiteQueen(context, x, y){
+function drawWhiteQueen(context: CanvasRenderingContext2D, x: number, y: number){
     const circleSvg = 'M 9 13 A 2 2 0 1 1  5,13 A 2 2 0 1 1  9 13 z';
-    const createQueenCirclePath = (xTranslate, yTranslate) => {
+    const createQueenCirclePath = (xTranslate: number, yTranslate: number): [Path2D, SVGMatrix] => {
         const path = new Path2D(circleSvg);
         const matrix = document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGMatrix();
         matrix.a = 1;
@@ -118,9 +118,9 @@ function drawWhiteQueen(context, x, y){
     context.stroke(path);
 }
 
-function drawBlackQueen(context, x, y){
+function drawBlackQueen(context: CanvasRenderingContext2D, x: number, y: number){
     const circleSvg = 'M 9 13 A 2 2 0 1 1  5,13 A 2 2 0 1 1  9 13 z';
-    const createQueenCirclePath = (xTranslate, yTranslate) => {
+    const createQueenCirclePath = (xTranslate: number, yTranslate: number): [Path2D, SVGMatrix] => {
         const path = new Path2D(circleSvg);
         const matrix = document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGMatrix();
         matrix.a = 1;
@@ -168,7 +168,7 @@ function drawBlackQueen(context, x, y){
     context.stroke(new Path2D('M 10.5,37.5 A 35,35 1 0 0 34.5,37.5'));
 }
 
-function drawWhiteRook(context, x, y){
+function drawWhiteRook(context: CanvasRenderingContext2D, x: number, y: number){
     context.resetTransform();
     context.translate(x+2, y);
     context.scale(1.3, 1.3);
@@ -192,7 +192,7 @@ function drawWhiteRook(context, x, y){
     });
 }
 
-function drawBlackRook(context, x, y){
+function drawBlackRook(context: CanvasRenderingContext2D, x: number, y: number){
     context.resetTransform();
     context.translate(x+2, y);
     context.scale(1.3, 1.3);
@@ -227,7 +227,7 @@ function drawBlackRook(context, x, y){
     });
 }
 
-function drawWhiteKing(context, x, y){
+function drawWhiteKing(context: CanvasRenderingContext2D, x: number, y: number){
     context.resetTransform();
     context.translate(x+2, y);
     context.scale(1.3, 1.3);
@@ -256,7 +256,7 @@ function drawWhiteKing(context, x, y){
     });
 }
 
-function drawBlackKing(context, x, y){
+function drawBlackKing(context: CanvasRenderingContext2D, x: number, y: number){
     context.resetTransform();
     context.translate(x+2, y);
     context.scale(1.3, 1.3);
@@ -290,7 +290,7 @@ function drawBlackKing(context, x, y){
     });
 }
 
-function drawBishop(context, x, y, isWhite){
+function drawBishop(context: CanvasRenderingContext2D, x: number, y: number, isWhite: boolean){
     context.resetTransform();
     context.translate(x+2, y);
     context.scale(1.3, 1.3);
@@ -317,7 +317,7 @@ function drawBishop(context, x, y, isWhite){
     });
 }
 
-function drawKnight(context, x, y, isWhite){
+function drawKnight(context: CanvasRenderingContext2D, x: number, y: number, isWhite: boolean){
     context.resetTransform();
     context.translate(x+2, y);
     context.scale(1.3, 1.3);
