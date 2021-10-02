@@ -1,7 +1,11 @@
 import React, { useRef, useEffect, LegacyRef } from 'react';
 import { drawBoard } from '../chess-board';
 
-const ChessBoard = (moves: string[]) => {
+interface ChessBoardProps {
+    moves: string[];
+};
+
+const ChessBoard = ({ moves }: ChessBoardProps) => {
     const canvas: LegacyRef<HTMLCanvasElement> = useRef(null);
 
     useEffect(() => {
