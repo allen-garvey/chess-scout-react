@@ -1,0 +1,14 @@
+.container {
+    height: 10px;
+    width: 300px;
+    display: flex;
+}
+.wins {
+    background-color: green;
+}
+.draws {
+    background-color: yellow;
+}
+.losses {
+    background-color: red;
+}
