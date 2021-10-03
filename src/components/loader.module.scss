@@ -1,0 +1,53 @@
+.grow {
+    animation-duration: 2s;
+    animation-name: grow;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+.body {
+    animation-duration: 2s;
+    animation-name: animateBody;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+.accent {
+    animation-duration: 2s;
+    animation-name: animateAccent;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes animateBody {
+    0% {
+        color: #000;
+    }
+
+    100% {
+        color: #fff
+    }
+}
+
+@keyframes animateAccent {
+    0% {
+        color: #fff;
+    }
+
+    100% {
+        color: #000
+    }
+}
