@@ -6,7 +6,7 @@ interface MoveTrees {
     black: GameNode;
 }
 
-interface GameNode {
+export interface GameNode {
     results: {
         wins: number,
         draws: number,
