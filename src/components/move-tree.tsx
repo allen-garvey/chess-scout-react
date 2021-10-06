@@ -15,21 +15,22 @@ const MoveTree = ({ title, tree }: MoveTreeProps) => {
 
     const isRoot = path.length === 0;
 
-    // treeTitle(){
-    //     if(this.isRoot){
-    //         return '';
-    //     }
-    //     let ret = ' - ';
-    //     let moveNumber = 0;
-    //     this.path.forEach((move, i) => {
-    //         if(i % 2 === 0){
-    //             moveNumber++;
-    //             ret += `${moveNumber}.`;
-    //         }
-    //         ret += `${move} `;
-    //     });
-    //     return ret;
-    // },
+    const getTreeTitle = () =>{
+        if(isRoot){
+            return '';
+        }
+        let ret = ' - ';
+        let moveNumber = 0;
+        path.forEach((move, i) => {
+            if(i % 2 === 0){
+                moveNumber++;
+                ret += `${moveNumber}.`;
+            }
+            ret += `${move} `;
+        });
+        return ret;
+    };
+    const treeTitle = getTreeTitle();
     const totalGames = Object.keys(currentNode.children).reduce((total, key) => total + currentNode.children[key].games.length, 0);
     
     const children = Object.keys(currentNode.children).sort((key1, key2) => currentNode.children[key2].games.length - currentNode.children[key1].games.length);
