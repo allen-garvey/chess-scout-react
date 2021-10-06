@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import css from 'loader.module.scss';
 import ResultsGraph from './results-graph';
+import GameLinksList from './game-links-list';
 import { GameNode } from '../chess/move-tree';
 
 interface MoveTreeProps {
@@ -94,18 +95,7 @@ const MoveTree = ({ title, tree }: MoveTreeProps) => {
                                 </dd>
                             </dl>
                         </div>
-                        <ul 
-                            className={css.gameLinksList}
-                            v-if="getChild(childKey).games.length <= 4"
-                        >
-                            <li 
-                                className={css.gameLinkItem}
-                                v-for="gameUrl in getChild(childKey).games" 
-                                key={gameUrl}
-                            >
-                                <a href={gameUrl} target="_blank" rel="noopener noreferrer">{ gameUrl.replace(/^https?:\/\/(www.)?/, '') }</a>
-                            </li>
-                        </ul>
+                        { getChild(childKey).games.length <= 4 && <GameLinksList games={getChild(childKey).games} /> }
                     </li>
                 </ol>
             </div>
