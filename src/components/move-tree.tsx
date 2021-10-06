@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import css from 'loader.module.scss';
+import ResultsGraph from './results-graph';
 import { GameNode } from '../chess/move-tree';
 
 interface MoveTreeProps {
@@ -58,38 +59,38 @@ const MoveTree = ({ title, tree }: MoveTreeProps) => {
         <div className={css.container}>
             <div>
                 <h4 className={css.title}>{title}{treeTitle}</h4>
-                <button v-if="!isRoot" @click="resetTree()">Reset</button>
-                <button className={css.copyButton} v-if="!isRoot" @click="copyPgn()">Copy PGN</button>
+                {!isRoot && <button onClick={resetTree}>Reset</button>}
+                {!isRoot && <button className={css.copyButton} onClick={copyPgn}>Copy PGN</button>}
                 <ol className={css.moveList}>
                     <li 
                         v-for="(childKey, index) in children" 
                         :key="index" 
                         className={css.statItem}
                     >
-                        <div className={css.clickable} @click="childClicked(childKey)">
+                        <div className={css.clickable} onClick={childClicked(childKey)}>
                             <h5 className={css.statTitle}>
-                                <span>{{ childKey }} {{ ' ' }}</span> 
+                                <span>{ childKey } { ' ' }</span> 
                                 <span className={css.gamesCount}>{{ getChild(childKey).games.length }} games </span> 
-                                <span className={css.gamesCountPercentage}>{{ calculatePercentage(getChild(childKey).games.length, totalGames) }}%</span>
+                                <span className={css.gamesCountPercentage}>{ calculatePercentage(getChild(childKey).games.length, totalGames) }%</span>
                             </h5>
-                            <results-graph 
-                                :total="getChild(childKey).games.length"
-                                :wins="getChild(childKey).results.wins"
-                                :draws="getChild(childKey).results.draws"
-                                :losses="getChild(childKey).results.losses"
+                            <ResultsGraph 
+                                total={getChild(childKey).games.length}
+                                wins={getChild(childKey).results.wins}
+                                draws={getChild(childKey).results.draws}
+                                losses={getChild(childKey).results.losses}
                             />
                             <dl className={css.statPercentages}>
                                 <dt>Wins</dt>
                                 <dd>
-                                    {{calculatePercentage(getChild(childKey).results.wins, getChild(childKey).games.length)}}%
+                                    {calculatePercentage(getChild(childKey).results.wins, getChild(childKey).games.length)}%
                                 </dd>
                                 <dt>Draws</dt>
                                 <dd>
-                                    {{calculatePercentage(getChild(childKey).results.draws, getChild(childKey).games.length)}}%
+                                    {calculatePercentage(getChild(childKey).results.draws, getChild(childKey).games.length)}%
                                 </dd>
                                 <dt>Losses</dt>
                                 <dd>
-                                    {{calculatePercentage(getChild(childKey).results.losses, getChild(childKey).games.length)}}%
+                                    {calculatePercentage(getChild(childKey).results.losses, getChild(childKey).games.length)}%
                                 </dd>
                             </dl>
                         </div>
@@ -100,9 +101,9 @@ const MoveTree = ({ title, tree }: MoveTreeProps) => {
                             <li 
                                 className={css.gameLinkItem}
                                 v-for="gameUrl in getChild(childKey).games" 
-                                :key="gameUrl"
+                                key={gameUrl}
                             >
-                                <a :href="gameUrl" target="_blank" rel="noopener noreferrer">{{ gameUrl.replace(/^https?:\/\/(www.)?/, '') }}</a>
+                                <a href={gameUrl} target="_blank" rel="noopener noreferrer">{ gameUrl.replace(/^https?:\/\/(www.)?/, '') }</a>
                             </li>
                         </ul>
                     </li>
