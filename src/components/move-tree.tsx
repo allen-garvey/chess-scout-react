@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import css from 'loader.module.scss';
-import ResultsGraph from './results-graph';
-import GameLinksList from './game-links-list';
+import css from 'move-tree.module.scss';
+import MoveTreeItem from './move-tree-item';
 import { GameNode } from '../chess/move-tree';
 
 interface MoveTreeProps {
@@ -34,9 +33,6 @@ const MoveTree = ({ title, tree }: MoveTreeProps) => {
     const totalGames = Object.keys(currentNode.children).reduce((total, key) => total + currentNode.children[key].games.length, 0);
     
     const children = Object.keys(currentNode.children).sort((key1, key2) => currentNode.children[key2].games.length - currentNode.children[key1].games.length);
-
-
-    const calculatePercentage = (part: number, total: number) => (part / total * 100).toFixed(2);
     
     const getChild = (key: string): GameNode => currentNode.children[key];
     
@@ -57,6 +53,11 @@ const MoveTree = ({ title, tree }: MoveTreeProps) => {
         navigator.clipboard.writeText(pgn);
     };
 
+    const moveTreeItems = children.map((childKey, i) => {
+        const node = getChild(childKey);
+        return (<MoveTreeItem gameNode={node} itemClickedCallback={childClicked} totalGames={totalGames} itemKey={childKey} key={`${childKey}-${i}`} />);
+    });
+
     return (
         <div className={css.container}>
             <div>
@@ -64,40 +65,7 @@ const MoveTree = ({ title, tree }: MoveTreeProps) => {
                 {!isRoot && <button onClick={resetTree}>Reset</button>}
                 {!isRoot && <button className={css.copyButton} onClick={copyPgn}>Copy PGN</button>}
                 <ol className={css.moveList}>
-                    <li 
-                        v-for="(childKey, index) in children" 
-                        :key="index" 
-                        className={css.statItem}
-                    >
-                        <div className={css.clickable} onClick={childClicked(childKey)}>
-                            <h5 className={css.statTitle}>
-                                <span>{ childKey } { ' ' }</span> 
-                                <span className={css.gamesCount}>{{ getChild(childKey).games.length }} games </span> 
-                                <span className={css.gamesCountPercentage}>{ calculatePercentage(getChild(childKey).games.length, totalGames) }%</span>
-                            </h5>
-                            <ResultsGraph 
-                                total={getChild(childKey).games.length}
-                                wins={getChild(childKey).results.wins}
-                                draws={getChild(childKey).results.draws}
-                                losses={getChild(childKey).results.losses}
-                            />
-                            <dl className={css.statPercentages}>
-                                <dt>Wins</dt>
-                                <dd>
-                                    {calculatePercentage(getChild(childKey).results.wins, getChild(childKey).games.length)}%
-                                </dd>
-                                <dt>Draws</dt>
-                                <dd>
-                                    {calculatePercentage(getChild(childKey).results.draws, getChild(childKey).games.length)}%
-                                </dd>
-                                <dt>Losses</dt>
-                                <dd>
-                                    {calculatePercentage(getChild(childKey).results.losses, getChild(childKey).games.length)}%
-                                </dd>
-                            </dl>
-                        </div>
-                        { getChild(childKey).games.length <= 4 && <GameLinksList games={getChild(childKey).games} /> }
-                    </li>
+                    { moveTreeItems }
                 </ol>
             </div>
         </div>
