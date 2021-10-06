@@ -1,0 +1,25 @@
+.search {
+    margin-bottom: 3rem;
+}
+.title {
+    margin: 0;
+}
+.gameTypes {
+    margin: 0.25rem 0 0;
+}
+.header {
+    margin: 0 0 1rem;
+}
+.moveTrees {
+    margin: 1.5rem 0 0;
+} 
+
+@media screen and (min-width: 900px) {
+    .content {
+        display: flex;
+    }
+
+    .moveTrees {
+        margin: 0 0 0 1rem;
+    }        
+}

@@ -1,7 +1,7 @@
 import { getResult } from './util';
 import { PgnGame } from './pgn-parser';
 
-interface MoveTrees {
+export interface MoveTrees {
     white: GameNode;
     black: GameNode;
 }

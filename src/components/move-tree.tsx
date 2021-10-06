@@ -6,9 +6,10 @@ import { GameNode } from '../chess/move-tree';
 interface MoveTreeProps {
     title: string;
     tree: GameNode;
+    treeUpdatedCallback: (moves: string[]) => void;
 }
 
-const MoveTree = ({ title, tree }: MoveTreeProps) => {
+const MoveTree = ({ title, tree, treeUpdatedCallback }: MoveTreeProps) => {
     const [currentNode, setCurrentNode] = useState(tree);
     const [path, setPath] = useState([] as string[]);
 
@@ -39,13 +40,13 @@ const MoveTree = ({ title, tree }: MoveTreeProps) => {
     const childClicked = (key: string) => {
         setPath(path.concat(key));
         setCurrentNode(getChild(key));
-        // send tree updated
+        treeUpdatedCallback(path);
     };
 
     const resetTree = () => {
         setPath([]);
         setCurrentNode(tree);
-        // send tree updated
+        treeUpdatedCallback(path);
     };
 
     const copyPgn = () => {

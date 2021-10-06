@@ -1,7 +1,11 @@
-import { parsePgn } from './chess/pgn-parser';
-import { getMoveTrees } from './chess/move-tree';
+import { parsePgn } from '../chess/pgn-parser';
+import { getMoveTrees, MoveTrees } from '../chess/move-tree';
 
-function getApiUrlForUser(userName, gameTypes){
+export interface UserGameStats {
+    moveTrees: MoveTrees;
+};
+
+function getApiUrlForUser(userName: string, gameTypes: string): string{
     const apiUrlBase = 'https://lichess.org/api/games/user/';
     const queryParamBase = `?max=40&perfType=${gameTypes}`;
     // return `${apiUrlBase}${encodeURIComponent(userName)}${queryParamBase}`;
@@ -9,7 +13,7 @@ function getApiUrlForUser(userName, gameTypes){
     return `/assets/${userName}.pgn`;
 }
 
-export function getUserGamesStats(userName, gameTypes){
+export function getUserGamesStats(userName: string, gameTypes: string): Promise<UserGameStats>{
     return fetch(getApiUrlForUser(userName, gameTypes)).then((res)=>{
         if(res.status !== 200){
             throw new Error('Error reaching lichess api');
