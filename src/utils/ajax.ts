@@ -10,7 +10,7 @@ function getApiUrlForUser(userName: string, gameTypes: string): string{
     const queryParamBase = `?max=40&perfType=${gameTypes}`;
     // return `${apiUrlBase}${encodeURIComponent(userName)}${queryParamBase}`;
     // for testing so not rate limited by lichess
-    return `/assets/${userName}.pgn`;
+    return `/${userName}.pgn`;
 }
 
 export function getUserGamesStats(userName: string, gameTypes: string): Promise<UserGameStats>{
