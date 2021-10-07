@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import css from 'move-tree-item.module.scss';
+import css from './move-tree-item.module.scss';
 import Loader from './loader';
 import Search from './search';
 import ChessBoard from './chess-board';
@@ -39,7 +39,7 @@ const Results = ({ userName, selectedGameTypes }: ResultsProps) => {
         }
     };
 
-    useEffect(() => {
+    useEffect(async () => {
         const results = await getUserGamesStats(userName, selectedGameTypes);
         setUserGameStats(results);
         setIsLoading(false);

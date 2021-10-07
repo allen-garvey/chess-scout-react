@@ -1,5 +1,5 @@
 import React from 'react';
-import css from 'move-tree-item.module.scss';
+import css from './move-tree-item.module.scss';
 import ResultsGraph from './results-graph';
 import GameLinksList from './game-links-list';
 import { GameNode } from '../chess/move-tree';

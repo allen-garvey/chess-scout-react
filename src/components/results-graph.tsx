@@ -1,5 +1,5 @@
 import React from 'react';
-import css from 'results-graph.module.scss';
+import css from './results-graph.module.scss';
 
 interface ResultsGraphProps {
     total: number;

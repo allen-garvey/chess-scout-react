@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import css from 'move-tree.module.scss';
+import css from './move-tree.module.scss';
 import MoveTreeItem from './move-tree-item';
 import { GameNode } from '../chess/move-tree';
 

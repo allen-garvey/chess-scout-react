@@ -1,5 +1,5 @@
 import React from 'react';
-import css from 'game-links-list.module.scss';
+import css from './game-links-list.module.scss';
 
 interface GameLinksListProps {
     games: string[];
