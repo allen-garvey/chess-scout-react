@@ -15,13 +15,13 @@ interface ResultsProps {
 const Results = ({ userName, selectedGameTypes }: ResultsProps) => {
     const [isLoading, setIsLoading] = useState(true);
     const [moves, setMoves] = useState([] as string[]);
-    const [userGameStats, setUserGameStats] = useState(null as UserGameStats?);
-    const [isWhiteSelected, setIsWhiteSelected] = useState(null as boolean?);
+    const [userGameStats, setUserGameStats] = useState(null as UserGameStats|null);
+    const [isWhiteSelected, setIsWhiteSelected] = useState(null as boolean|null);
 
     const getGameTypesTitle = () => {
         return selectedGameTypes.split(',')
         .map(key => {
-            const gameType = gameTypes.find(gameType => gameType.key === key);
+            const gameType = gameTypes().find(gameType => gameType.key === key);
             return gameType ? gameType.title : '';
         })
         .filter(s => s)
