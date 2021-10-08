@@ -12,7 +12,17 @@ const Loader = () => (
             { 
                 // black knight
             }
-            <g style={{opacity:1, fill:'none', 'fill-rule':'evenodd', stroke:'#000000', 'stroke-width':1.5, 'stroke-linecap':'round', 'stroke-linejoin': 'round', 'stroke-miterlimit': 4, 'stroke-dasharray': 'none', 'stroke-opacity': 1}} transform="translate(135,45)">
+            <g 
+                fillRule="evenodd" 
+                strokeWidth="1.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                strokeMiterlimit="4"
+                strokeDasharray="none"
+                strokeOpacity="1"
+                style={{opacity:1, fill:'none', stroke:'#000000',}} 
+                transform="translate(135,45)"
+            >
                 <g className={css.body}>
                     <path
                     d="M 22,10 C 32.5,11 38.5,18 38,39 L 15,39 C 15,30 25,32.5 23,18"
