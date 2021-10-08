@@ -39,10 +39,11 @@ const Results = ({ userName, selectedGameTypes }: ResultsProps) => {
         }
     };
 
-    useEffect(async () => {
-        const results = await getUserGamesStats(userName, selectedGameTypes);
-        setUserGameStats(results);
-        setIsLoading(false);
+    useEffect(() => {
+        getUserGamesStats(userName, selectedGameTypes).then((results) => {
+            setUserGameStats(results);
+            setIsLoading(false);
+        });
     }, []);
 
     return (
