@@ -13,9 +13,9 @@ interface ResultsProps {
 }
 
 const Results = ({ userName, selectedGameTypes }: ResultsProps) => {
+    const [userGameStats, setUserGameStats] = useState(null as UserGameStats|null);
     const [isLoading, setIsLoading] = useState(true);
     const [moves, setMoves] = useState([] as string[]);
-    const [userGameStats, setUserGameStats] = useState(null as UserGameStats|null);
     const [isWhiteSelected, setIsWhiteSelected] = useState(null as boolean|null);
 
     const getGameTypesTitle = () => {
@@ -50,7 +50,7 @@ const Results = ({ userName, selectedGameTypes }: ResultsProps) => {
         <div>
             {isLoading &&  <Loader />}
             {!isLoading && <div className={css.search}><Search /></div>}
-            {isLoading && <div>
+            {!isLoading && <div>
                 <div className={css.header}>
                     <h1 className={css.title}>Opening stats for <a href={userNameUrl} target="_blank" rel="noopener">{userName}</a></h1>
                     {gameTypesTitle && <div className={css.gameTypes}>{ gameTypesTitle }</div>}
