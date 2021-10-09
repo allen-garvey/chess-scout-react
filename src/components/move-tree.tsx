@@ -38,15 +38,17 @@ const MoveTree = ({ title, tree, treeUpdatedCallback }: MoveTreeProps) => {
     const getChild = (key: string): GameNode => currentNode.children[key];
     
     const childClicked = (key: string) => {
-        setPath(path.concat(key));
+        const newPath = path.concat(key)
+        setPath(newPath);
         setCurrentNode(getChild(key));
-        treeUpdatedCallback(path);
+        treeUpdatedCallback(newPath);
     };
 
     const resetTree = () => {
-        setPath([]);
+        const newPath = [];
+        setPath(newPath);
         setCurrentNode(tree);
-        treeUpdatedCallback(path);
+        treeUpdatedCallback(newPath);
     };
 
     const copyPgn = () => {
