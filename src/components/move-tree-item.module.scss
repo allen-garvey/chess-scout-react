@@ -1,3 +1,11 @@
+.clickable {
+    cursor: pointer;
+
+    &:hover {
+        background-color: #d1eeff;
+    }
+}
+
 .statTitle {
     font-size: 1rem;
     margin: 0 0 0.5rem;

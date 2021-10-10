@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import css from './move-tree-item.module.scss';
+import css from './results.module.scss';
 import Loader from './loader';
 import Search from './search';
 import ChessBoard from './chess-board';

@@ -32,7 +32,7 @@ const Search = () => {
         <form onSubmit={submitAction}>
             <div className={css.searchContainer}>
                 <label 
-                    className={cx(css.searchLabel, 'form-control')}
+                    className={css.searchLabel}
                 >
                     Lichess User Name
                     <input 
