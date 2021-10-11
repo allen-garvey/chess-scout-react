@@ -2,6 +2,7 @@ import React, {FormEvent, useState} from 'react';
 import cx from 'classnames';
 import { useHistory } from 'react-router-dom';
 import css from './search.module.scss';
+import formCss from './form.module.scss';
 import getGameTypes, {IGameType} from '../models/game-types';
 
 const Search = () => {
@@ -37,12 +38,12 @@ const Search = () => {
                     Lichess User Name
                     <input 
                         type="search" 
-                        className="form-control" 
+                        className={formCss['form-control']} 
                         value={userName} onInput={(e) => setUserName((e.target as HTMLInputElement).value)} 
                     />
                 </label>
                 <input 
-                    className={cx(css.button, 'btn',  'btn-primary')} 
+                    className={cx(css.button, formCss.btn,  formCss['btn-primary'])} 
                     type="submit" 
                     value="Submit" 
                     disabled={!userName} 
@@ -54,7 +55,7 @@ const Search = () => {
                         <input 
                             id={gameTypeId(gameType)}
                             type="checkbox"
-                            className="form-check-input"
+                            className={formCss['form-check-input']}
                             checked={gameType.isChecked}
                             onInput={() => toggleGameType(gameType)}
                         />
