@@ -57,7 +57,7 @@ const Search = () => {
                             type="checkbox"
                             className={formCss['form-check-input']}
                             checked={gameType.isChecked}
-                            onInput={() => toggleGameType(gameType)}
+                            onChange={() => toggleGameType(gameType)}
                         />
                         <label className={css.label} htmlFor={gameTypeId(gameType)}>{ gameType.title }</label>
                     </div> 
