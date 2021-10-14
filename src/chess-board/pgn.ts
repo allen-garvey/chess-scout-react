@@ -170,11 +170,11 @@ function moveKnight(position: Board, move: string, isWhite: boolean): Board{
     return newPosition;
 }
 
-function moveBishop(position: Board, move: string, isWhite: boolean): Board{
-    function getPolarity(n1, n2){
-        return n1 % 2 === n2 % 2;
-    }
+function getPolarity(n1: number, n2: number): boolean{
+    return n1 % 2 === n2 % 2;
+}
 
+function moveBishop(position: Board, move: string, isWhite: boolean): Board{
     const column = getColumn(move[move.length - 2]);
     const row = getRow(move[move.length - 1]);
     const piece = `${isWhite ? WHITE : BLACK}${BISHOP}`;
@@ -221,11 +221,89 @@ function moveRook(position: Board, move: string, isWhite: boolean): Board{
     return newPosition;
 }
 
-function moveSinglePiece(position: Board, move: string, isWhite: boolean, pieceSymbol: string): Board{
+function moveKing(position: Board, move: string, isWhite: boolean): Board{
     const column = getColumn(move[move.length - 2]);
     const row = getRow(move[move.length - 1]);
-    const piece = `${isWhite ? WHITE : BLACK}${pieceSymbol}`;
+    const piece = `${isWhite ? WHITE : BLACK}${KING}`;
     const foundPiece = findPieces(position, piece)[0];
+    const newPosition = copyPosition(position);
+    newPosition[row][column] = piece;
+    newPosition[foundPiece.y][foundPiece.x] = EMPTY_CELL;
+    
+    return newPosition;
+}
+
+function moveQueen(position: Board, move: string, isWhite: boolean): Board{
+    function isHorizontalClear(column, row, x): boolean{
+        const startColumn = Math.min(x, column) + 1;
+        const endColumn = Math.max(x, column);
+        for(let i=startColumn;i<endColumn;i++){
+            if(position[row][i] !== EMPTY_CELL){
+                return false;
+            }
+        }
+        return true;
+    }
+    function isVerticalClear(column, row, y): boolean{
+        const startRow = Math.min(y, row) + 1;
+        const endRow = Math.max(y, row);
+        for(let i=startRow;i<endRow;i++){
+            if(position[i][column] !== EMPTY_CELL){
+                return false;
+            }
+        }
+        return true;
+    }
+    function isDiagonalClear(column, row, x, y): boolean{
+        const startRow = Math.min(y, row) + 1;
+        const endRow = Math.max(y, row);
+        let startColumn = x;
+        let columnIncrement = y < row ? -1 : 1;
+        if(startRow + 1 === row){
+            startColumn = column;
+            columnIncrement = row < y ? -1 : 1;
+        }
+        for(let i=startRow,j=1;i<endRow;i++,j++){
+            if(position[i][startColumn+(j*columnIncrement)] !== EMPTY_CELL){
+                return false;
+            }
+        }
+        return true;
+    }
+    function findPiece(pieces: Coordinate[], column: number, row: number, specifiedColumn: number|false, specifiedRow): Coordinate{
+        if(pieces.length === 1){
+            return pieces[0];
+        }
+        const piecePolarity = getPolarity(column, row);
+        for(const piece of pieces){
+            const {x, y} = piece;
+            if(specifiedColumn !== false && x !== specifiedColumn){
+                continue;
+            }
+            if(specifiedRow !== false && y !== specifiedRow){
+                continue;
+            }
+            if(x === column && isVerticalClear(column, row, y)){
+                return piece;
+            }
+            if(y === row && isHorizontalClear(column, row, x)){
+                return piece;
+            }
+            if(piecePolarity === getPolarity(x, y) && isDiagonalClear(column, row, x, y)){
+                return piece;
+            }
+        }
+        //should never hit this
+        return {x: -1, y: -1};
+    }
+
+    const column = getColumn(move[move.length - 2]);
+    const row = getRow(move[move.length - 1]);
+    const piece = `${isWhite ? WHITE : BLACK}${QUEEN}`;
+    const movedPieceColumn = move.length >= 4 && /^[a-h]$/.test(move[1]) ? getColumn(move[1]) : false;
+    const movedPieceRow = move.length >= 4 && /^[1-8]$/.test(move[1]) ? getRow(move[1]) : false;
+    const foundPieces = findPieces(position, piece);
+    const foundPiece = findPiece(foundPieces, column, row, movedPieceColumn, movedPieceRow);
     const newPosition = copyPosition(position);
     newPosition[row][column] = piece;
     newPosition[foundPiece.y][foundPiece.x] = EMPTY_CELL;
@@ -334,11 +412,10 @@ function pgnToPosition(moves: string[]): Board{
                 position = moveRook(position, cleanedMove, isWhite);
                 break;
             case /^Qx?[a-h]\d$/.test(cleanedMove):
-                // TODO: this will not work if there are multiple queens
-                position = moveSinglePiece(position, cleanedMove, isWhite, QUEEN);
+                position = moveQueen(position, cleanedMove, isWhite);
                 break;
             case /^Kx?[a-h]\d$/.test(cleanedMove):
-                position = moveSinglePiece(position, cleanedMove, isWhite, KING);
+                position = moveKing(position, cleanedMove, isWhite);
                 break;
             case move === 'O-O':
                 position = shortCastle(position, isWhite);
