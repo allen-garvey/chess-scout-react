@@ -39,6 +39,7 @@ const Search = () => {
                     <input 
                         type="search" 
                         className={formCss['form-control']} 
+                        placeholder="EricRosen"
                         value={userName} onInput={(e) => setUserName((e.target as HTMLInputElement).value)} 
                     />
                 </label>
