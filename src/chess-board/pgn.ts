@@ -411,7 +411,7 @@ function pgnToPosition(moves: string[]): Board{
             case /^R[a-h1-8]?x?[a-h]\d$/.test(cleanedMove):
                 position = moveRook(position, cleanedMove, isWhite);
                 break;
-            case /^Qx?[a-h]\d$/.test(cleanedMove):
+            case /^Q[a-h1-8]?x?[a-h]\d$/.test(cleanedMove):
                 position = moveQueen(position, cleanedMove, isWhite);
                 break;
             case /^Kx?[a-h]\d$/.test(cleanedMove):
