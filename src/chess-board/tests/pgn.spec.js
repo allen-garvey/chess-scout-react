@@ -370,6 +370,34 @@ describe('#pgnToPosition Rook moves', () => {
     });
 });
 
+describe('#pgnToPosition multiple rooks', () => {
+    test('makes correct vertical rook battery move', () => {
+        expect(pgn.pgnToPosition(['e4','d5','exd5','Qxd5','Nc3','Qa5','d4','Nf6','Qd2','Ne4','Nxe4','Qxd2+','Bxd2','e5','dxe5','Be6','Be2','Nc6','Nf3','O-O-O','O-O','Re8','Be3','Be7','Rfd1','a6','Rd3','h6','Rad1','Rh7','Rd5','h5','R1d3','a5','Rd2'])).toEqual([
+            ['00', '00', 'bK', '00', 'bR', '00', '00', '00'],
+            ['00', 'bP', 'bP', '00', 'bB', 'bP', 'bP', 'bR'],
+            ['00', '00', 'bN', '00', 'bB', '00', '00', '00'],
+            ['bP', '00', '00', 'wR', 'wP', '00', '00', 'bP'],
+            ['00', '00', '00', '00', 'wN', '00', '00', '00'],
+            ['00', '00', '00', '00', 'wB', 'wN', '00', '00'],
+            ['wP', 'wP', 'wP', 'wR', 'wB', 'wP', 'wP', 'wP'],
+            ['00', '00', '00', '00', '00', '00', 'wK', '00'],
+        ]);
+    });
+
+    test('makes correct horizontal rook battery move', () => {
+        expect(pgn.pgnToPosition(['e4','c6','d4','d5','exd5','cxd5','c4','dxc4','Bxc4','Nf6','Nf3','Nc6','O-O','e6','Nc3','Be7','Bd2','O-O','Qc2','Bd7','Rfd1','Rc8','Re1', 'Rb8', 'Rab1', 'Rc8', 'Ra1'])).toEqual([
+            ['00', '00', 'bR', 'bQ', '00', 'bR', 'bK', '00'],
+            ['bP', 'bP', '00', 'bB', 'bB', 'bP', 'bP', 'bP'],
+            ['00', '00', 'bN', '00', 'bP', 'bN', '00', '00'],
+            ['00', '00', '00', '00', '00', '00', '00', '00'],
+            ['00', '00', 'wB', 'wP', '00', '00', '00', '00'],
+            ['00', '00', 'wN', '00', '00', 'wN', '00', '00'],
+            ['wP', 'wP', 'wQ', 'wB', '00', 'wP', 'wP', 'wP'],
+            ['wR', '00', '00', '00', 'wR', '00', 'wK', '00'],
+        ]);
+    });
+});
+
 describe('#pgnToPosition pawn promotion', () => {
     test('pawn promotes to Queen', () => {
         expect(pgn.pgnToPosition(['h4', 'h5', 'g4', 'hxg4', 'h5', 'd5', 'h6', 'Nf6', 'h7', 'Rg8', 'h8=Q'])).toEqual([
