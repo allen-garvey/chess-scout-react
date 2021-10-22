@@ -1,6 +1,17 @@
-# Getting Started with Create React App
+# Chess Scout React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This web app uses the Lichess api to visualize the results of chess openings / move orders by a player. This is helpful to see your own opening strengths and weaknesses or pick repetoire to play against an opponent.
+
+## Dependencies
+
+* node >= 14.14
+* npm
+
+## Getting Started
+
+* Clone or download this repository
+* `npm install`
+* `npm start`
 
 ## Available Scripts
 
