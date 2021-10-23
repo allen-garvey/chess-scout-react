@@ -40,7 +40,8 @@ const Search = () => {
                         type="search" 
                         className={formCss['form-control']} 
                         placeholder="EricRosen"
-                        value={userName} onInput={(e) => setUserName((e.target as HTMLInputElement).value)} 
+                        value={userName} onInput={(e) => setUserName((e.target as HTMLInputElement).value)}
+                        autoFocus 
                     />
                 </label>
                 <input 
