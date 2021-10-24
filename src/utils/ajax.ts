@@ -8,9 +8,9 @@ export interface UserGameStats {
 function getApiUrlForUser(userName: string, gameTypes: string): string{
     const apiUrlBase = 'https://lichess.org/api/games/user/';
     const queryParamBase = `?max=40&perfType=${gameTypes}`;
-    // return `${apiUrlBase}${encodeURIComponent(userName)}${queryParamBase}`;
+    return `${apiUrlBase}${encodeURIComponent(userName)}${queryParamBase}`;
     // for testing so not rate limited by lichess
-    return `/${userName}.pgn`;
+    // return `/${userName}.pgn`;
 }
 
 export function getUserGamesStats(userName: string, gameTypes: string): Promise<UserGameStats>{
