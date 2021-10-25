@@ -45,7 +45,7 @@ function getMoveTreesForColor(games: PgnGame[], playerName: string, color: strin
         if(header[color] !== playerName){
             return;
         }
-        const _index = root.games.push[header.Site];
+        root.games.push[header.Site];
         let currentNode = root;
         const moves = game.moves.flat();
         const limit = Math.min(max, moves.length - 1);
