@@ -1,0 +1,10 @@
+{
+    "extends": ["react-app", "react-app/jest"],
+    "rules": {
+        "no-fallthrough": 0,
+        "@typescript-eslint/no-unused-expressions": 0,
+        "no-mixed-operators": 0,
+        "import/no-anonymous-default-export": 0
+    },
+    "ignorePatterns": ["src/**/*.spec.ts"]
+}
