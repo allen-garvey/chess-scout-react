@@ -52,7 +52,7 @@ const Results = ({ userName, selectedGameTypes }: ResultsProps) => {
             {!isLoading && <div className={css.search}><Search /></div>}
             {!isLoading && <div>
                 <div className={css.header}>
-                    <h1 className={css.title}>Opening stats for <a href={userNameUrl} target="_blank" rel="noopener">{userName}</a></h1>
+                    <h1 className={css.title}>Opening stats for <a href={userNameUrl} target="_blank" rel="noopener noreferrer">{userName}</a></h1>
                     {gameTypesTitle && <div className={css.gameTypes}>{ gameTypesTitle }</div>}
                 </div>
                 <div className={css.content}>
