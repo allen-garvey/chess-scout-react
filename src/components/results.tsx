@@ -17,6 +17,7 @@ const Results = ({ userName, selectedGameTypes }: ResultsProps) => {
     const [isLoading, setIsLoading] = useState(true);
     const [moves, setMoves] = useState([] as string[]);
     const [isWhiteSelected, setIsWhiteSelected] = useState(null as boolean|null);
+    const [userNotFound, setUserNotFound] = useState(false);
 
     const getGameTypesTitle = () => {
         return selectedGameTypes.split(',')
@@ -40,17 +41,25 @@ const Results = ({ userName, selectedGameTypes }: ResultsProps) => {
     };
 
     useEffect(() => {
-        getUserGamesStats(userName, selectedGameTypes).then((results) => {
+        setIsLoading(true);
+        setUserNotFound(false);
+        
+        getUserGamesStats(userName, selectedGameTypes)
+        .then((results) => {
             setUserGameStats(results);
             setIsLoading(false);
+        })
+        .catch(() => {
+            setUserNotFound(true);
+            setIsLoading(false);
         });
-    }, []);
+    }, [userName, selectedGameTypes]);
 
     return (
         <div>
             {isLoading &&  <Loader />}
             {!isLoading && <div className={css.search}><Search /></div>}
-            {!isLoading && <div>
+            {!isLoading && !userNotFound && <div>
                 <div className={css.header}>
                     <h1 className={css.title}>Opening stats for <a href={userNameUrl} target="_blank" rel="noopener noreferrer">{userName}</a></h1>
                     {gameTypesTitle && <div className={css.gameTypes}>{ gameTypesTitle }</div>}
@@ -70,6 +79,9 @@ const Results = ({ userName, selectedGameTypes }: ResultsProps) => {
                         />}
                     </div>
                 </div>
+            </div>}
+            {!isLoading && userNotFound && <div>
+                <h2>User { userName } not found</h2>
             </div>}
         </div>
     );
