@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import css from './results.module.scss';
 import Loader from './loader';
+import Header from './header';
 import Search from './search';
 import ChessBoard from './chess-board';
 import MoveTree from './move-tree';
@@ -58,6 +59,7 @@ const Results = ({ userName, selectedGameTypes }: ResultsProps) => {
     return (
         <div>
             {isLoading &&  <Loader />}
+            {!isLoading && <Header />}
             {!isLoading && <div className={css.search}><Search /></div>}
             {!isLoading && !userNotFound && <div>
                 <div className={css.header}>

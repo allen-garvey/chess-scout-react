@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import Search from './components/search';
+import Homepage from './components/homepage';
 import ResultsRoute from './components/results-route';
 
 
@@ -14,7 +14,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/">
-          <Search />
+          <Homepage />
         </Route>
         <Route path="/u/:userName" children={<ResultsRoute />} />
       </Switch>
