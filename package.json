@@ -21,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "hydrate": "curl --header 'Accept: application/vnd.lichess.v3+json' https://lichess.org/player > public/top-players.json"
   },
   "eslintConfig": {
     "extends": [

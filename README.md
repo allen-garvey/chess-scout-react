@@ -11,6 +11,7 @@ This web app uses the Lichess api to visualize the results of chess openings / m
 
 * Clone or download this repository
 * `npm install`
+* `npm run hydrate`
 * `npm start`
 
 ## Available Scripts
