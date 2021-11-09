@@ -39,10 +39,11 @@ function createNode(): GameNode{
 function getMoveTreesForColor(games: PgnGame[], playerName: string, color: string, moveDepth: number): GameNode{
     const root = createNode();
     const max = moveDepth * 2;
+    const normalizedPlayerName = playerName.toLowerCase();
 
     games.forEach((game) => {
         const header = game.header;
-        if(header[color] !== playerName){
+        if(header[color].toLowerCase() !== normalizedPlayerName){
             return;
         }
         root.games.push[header.Site];
