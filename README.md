@@ -56,3 +56,11 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Attributions
+
+Chess piece designs from [https://commons.wikimedia.org/wiki/File:Chess_Pieces_Sprite.svg](https://commons.wikimedia.org/wiki/File:Chess_Pieces_Sprite.svg)
+
+## License
+
+Chess Scout React is released under the MIT License. See license.txt for more details.
